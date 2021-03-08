@@ -37,6 +37,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Employee.findById", query = "SELECT e FROM Employee e WHERE e.id = :id")})
 public class Employee implements Serializable {
 
+    @OneToMany(mappedBy = "employeeid")
+    private Collection<WorkShift> workShiftCollection;
+
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @NotNull
@@ -136,6 +139,15 @@ public class Employee implements Serializable {
     @Override
     public String toString() {
         return "database.Employee[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<WorkShift> getWorkShiftCollection() {
+        return workShiftCollection;
+    }
+
+    public void setWorkShiftCollection(Collection<WorkShift> workShiftCollection) {
+        this.workShiftCollection = workShiftCollection;
     }
     
 }
