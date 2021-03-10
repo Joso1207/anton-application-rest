@@ -6,6 +6,7 @@
 package database.service;
 
 import database.Orders;
+import java.net.URI;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -19,6 +20,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
+
 
 /**
  *
@@ -35,13 +39,30 @@ public class OrdersFacadeREST extends AbstractFacade<Orders> {
         super(Orders.class);
     }
 
-    @POST
+    /*@POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Orders entity) {
         super.create(entity);
-    }
+    }*/
 
+    @POST
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Response create2(Orders entity) {
+        Response response;
+        
+        
+        super.create(entity);
+        em.flush();
+        
+        URI uri = UriBuilder.fromPath("/{id}").build(entity.getId());
+        response = Response.created(uri).entity(entity).build();
+    
+        
+        return response;
+    }
+    
+    
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
