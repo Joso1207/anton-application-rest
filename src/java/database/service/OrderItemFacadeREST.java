@@ -42,6 +42,19 @@ public class OrderItemFacadeREST extends AbstractFacade<OrderItem> {
         super.create(entity);
     }
 
+            
+    @POST
+    @Path("insertlist")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public void create2(List<OrderItem> list) {
+        
+        for(OrderItem item:list){
+            super.create(item);
+        }
+        
+    }
+	
+
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
