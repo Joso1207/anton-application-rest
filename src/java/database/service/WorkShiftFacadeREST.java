@@ -40,6 +40,7 @@ public class WorkShiftFacadeREST extends AbstractFacade<WorkShift> {
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(WorkShift entity) {
         super.create(entity);
+        em.flush();
     }
 
     @PUT
@@ -47,6 +48,7 @@ public class WorkShiftFacadeREST extends AbstractFacade<WorkShift> {
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, WorkShift entity) {
         super.edit(entity);
+        em.flush();
     }
 
     @DELETE
