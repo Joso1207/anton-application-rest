@@ -40,6 +40,8 @@ public class OrderItemFacadeREST extends AbstractFacade<OrderItem> {
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(OrderItem entity) {
         super.create(entity);
+        
+        em.flush();
     }
 
             
@@ -51,6 +53,8 @@ public class OrderItemFacadeREST extends AbstractFacade<OrderItem> {
         for(OrderItem item:list){
             super.create(item);
         }
+        
+        em.flush();
         
     }
 	
